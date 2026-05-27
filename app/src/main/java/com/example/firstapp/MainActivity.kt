@@ -1,14 +1,9 @@
 package com.example.firstapp
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
-import com.example.swipebutton_library.OnActiveListener
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Switch
-import android.widget.Toast
-import com.example.swipebutton_library.SwipeButton
 
 class MainActivity : AppCompatActivity() {
 

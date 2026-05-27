@@ -11,12 +11,17 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import android.widget.TextView
 import androidx.activity.addCallback
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity2 : AppCompatActivity() {
 
-    lateinit var database : DatabaseReference
+        lateinit var database : DatabaseReference
 
-    @SuppressLint("WrongViewCast")
+        object tejas{
+            val auth : FirebaseAuth = FirebaseAuth.getInstance()
+        }
+
+    @SuppressLint("WrongViewCast", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -33,6 +38,7 @@ class MainActivity2 : AppCompatActivity() {
         val confirmPassw = findViewById<EditText>(R.id.editTextConfirmPassword)
         val buttonSignUp = findViewById<Button>(R.id.buttonsignUp)
         val login = findViewById<TextView>(R.id.textView7)
+        var intent : Intent
 
         buttonSignUp.setOnClickListener {
             val email = emailA.text.toString()
@@ -41,7 +47,7 @@ class MainActivity2 : AppCompatActivity() {
 
             val store = User(email,pass)
 
-            if(email.isEmpty() || pass.isEmpty() || confirmPass.isEmpty())
+            if(email.isEmpty() && pass.isEmpty() && confirmPass.isEmpty())
             {
                 Toast.makeText(this, "all field *required", Toast.LENGTH_SHORT).show()
             }
@@ -49,6 +55,20 @@ class MainActivity2 : AppCompatActivity() {
             {
                 if (pass == confirmPass)
                 {
+                    //below code is for Authentication
+                    tejas.auth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener {
+                        if(it.isSuccessful)
+                        {
+                            Toast.makeText(this, "User Created ", Toast.LENGTH_SHORT).show()
+                            intent = Intent(this, MainActivity3::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }.addOnFailureListener {
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    // below code is for Data storing in Firebase Realtime Database
                     database = FirebaseDatabase.getInstance().getReference("Users")
                     database.orderByChild("email").equalTo(email).get().addOnSuccessListener {
                         if (it.exists())
@@ -76,7 +96,7 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
         login.setOnClickListener {
-            val intent = Intent(this, MainActivity3::class.java)
+            intent = Intent(this, MainActivity3::class.java)
                 startActivity(intent)
         }
     }
