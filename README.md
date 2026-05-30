@@ -10,8 +10,10 @@ Then Firebase said “hold my JSON file”.
 
 ## Screenshots
 
-![Home Screen](Screenshot/Screenshot_20260529)
-![Login Screen](screenshots/login.png)
+![Home Screen](Screenshot/Screenshot_20260529-203450.png)
+![Sign-Up Screen](Screenshot/Screenshot_20260529-203509.png)
+![Sign-In Screen](Screenshot/Screenshot_20260529-203531.png)
+
 
 ---
 
