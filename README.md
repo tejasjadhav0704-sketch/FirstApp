@@ -22,7 +22,10 @@ Sign-Up Screen
 <p align="center">
   <img src="Screenshot/Screenshot_20260529-203531.png" width="300">
 </p>
-
+Sign-Up Screen
+<p align="center">
+  <img src="Screenshot/1-final-230651.png" width="300">
+</p>
 
 ---
 
